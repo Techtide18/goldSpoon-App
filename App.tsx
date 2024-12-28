@@ -117,11 +117,61 @@
 
 // export default App;
 
-import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+// import React from 'react';
+// import { SafeAreaView, StyleSheet } from 'react-native';
+// import { WebView } from 'react-native-webview';
+
+// const App: React.FC = () => {
+//     return (
+//         <SafeAreaView style={styles.container}>
+//             <WebView
+//                 source={{ uri: 'https://goldspoon.in' }}
+//                 style={styles.webview}
+//             />
+//         </SafeAreaView>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         backgroundColor: '#fff',
+//     },
+//     webview: {
+//         flex: 1,
+//     },
+// });
+
+// export default App;
+
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 import { WebView } from 'react-native-webview';
 
 const App: React.FC = () => {
+    const [isConnected, setIsConnected] = useState(true);
+
+    useEffect(() => {
+        // Subscribe to network state updates
+        const unsubscribe = NetInfo.addEventListener(state => {
+            setIsConnected(state.isConnected ?? false);
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, []);
+
+    if (!isConnected) {
+        return (
+            <SafeAreaView style={styles.noInternetContainer}>
+                <Text style={styles.noInternetText}>
+                    No Internet Connection. Please check your connection and try again.
+                </Text>
+            </SafeAreaView>
+        );
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <WebView
@@ -139,6 +189,19 @@ const styles = StyleSheet.create({
     },
     webview: {
         flex: 1,
+    },
+    noInternetContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    noInternetText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000',
+        textAlign: 'center',
+        paddingHorizontal: 20,
     },
 });
 
