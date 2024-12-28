@@ -92,6 +92,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('my-release-key.keystore')
+            storePassword 'goldspoon' // Keystore password
+            keyAlias 'my-key-alias'   // Key alias used during key generation
+            keyPassword 'goldspoon'  // Key password (usually the same as the keystore password)
+        }
     }
     buildTypes {
         debug {
@@ -100,9 +106,14 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+     applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Goldspoon-v1.apk"
         }
     }
 }
