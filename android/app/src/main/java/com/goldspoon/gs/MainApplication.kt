@@ -1,4 +1,4 @@
-package com.goldspoon
+package com.goldspoon.gs
 
 import android.app.Application
 import com.facebook.react.PackageList

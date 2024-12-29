@@ -1,4 +1,4 @@
-package com.goldspoon
+package com.goldspoon.gs
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
