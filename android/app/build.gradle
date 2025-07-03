@@ -77,13 +77,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.goldspoon.gs"
+    namespace "com.gold.spoon"
     defaultConfig {
-        applicationId "com.goldspoon.gs"
+        applicationId "com.gold.spoon"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3.0"
     }
     signingConfigs {
         debug {
@@ -93,10 +93,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('my-release-key.keystore')
-            storePassword 'goldspoon' // Keystore password
-            keyAlias 'my-key-alias'   // Key alias used during key generation
-            keyPassword 'goldspoon'  // Key password (usually the same as the keystore password)
+            storeFile file('@voicedown__SupCurrency-keystore.bak.jks')
+            storePassword '048c649f54444eb8f0108032038573e9' // Keystore password
+            keyAlias '74a641014d32b11fe5671cf1e99e9ed4'   // Key alias used during key generation
+            keyPassword '0292e2841623e1c57db89718d677b2b2'  // Key password (JKS format supports different key password)
         }
     }
     buildTypes {
